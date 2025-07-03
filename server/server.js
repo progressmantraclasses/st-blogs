@@ -106,10 +106,16 @@ app.get('/api/auth/check', authMiddleware, (req, res) => {
 
 
 // Logout Route
+// Logout Route
 app.post("/api/logout", (req, res) => {
-  res.clearCookie('token'); // Clear the token cookie
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+  });
   res.json({ message: "Logged out successfully" });
 });
+
 
 
 
