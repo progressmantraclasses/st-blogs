@@ -325,14 +325,14 @@ router.get("/google/callback", passport.authenticate("google", { session: false 
         return res.redirect("https://st-blogs.vercel.app/login?error=OAuthFailed");
     }
 
-res.cookie('token', token, {
-  httpOnly: true,             // Prevents access from JS
-  secure: true,               // Ensures cookies are sent only over HTTPS
-  sameSite: 'None',           // REQUIRED for cross-site cookies
-  maxAge: 24 * 60 * 60 * 1000 // 1 day
-});
+    const token = req.user.token;
 
-
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: true, // Set to true for production with HTTPS
+        sameSite: 'None', // Required for cross-site cookies (e.g., Render backend + Vercel frontend)
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
+    });
 
     res.redirect("https://st-blogs.vercel.app");
 });
@@ -345,14 +345,14 @@ router.get("/github/callback", passport.authenticate("github", { session: false 
         return res.redirect("https://st-blogs.vercel.app/login?error=OAuthFailed");
     }
 
-res.cookie('token', token, {
-  httpOnly: true,             // Prevents access from JS
-  secure: true,               // Ensures cookies are sent only over HTTPS
-  sameSite: 'None',           // REQUIRED for cross-site cookies
-  maxAge: 24 * 60 * 60 * 1000 // 1 day
-});
+    const token = req.user.token;
 
-
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
+        maxAge: 24 * 60 * 60 * 1000
+    });
 
     res.redirect("https://st-blogs.vercel.app");
 });
@@ -365,12 +365,14 @@ router.get("/linkedin/callback", passport.authenticate("linkedin", { session: fa
         return res.redirect("https://st-blogs.vercel.app/login?error=OAuthFailed");
     }
 
-res.cookie('token', token, {
-  httpOnly: true,             // Prevents access from JS
-  secure: true,               // Ensures cookies are sent only over HTTPS
-  sameSite: 'None',           // REQUIRED for cross-site cookies
-  maxAge: 24 * 60 * 60 * 1000 // 1 day
-});
+    const token = req.user.token;
+
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
+        maxAge: 24 * 60 * 60 * 1000
+    });
 
     res.redirect("https://st-blogs.vercel.app");
 });
