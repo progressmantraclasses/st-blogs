@@ -20,7 +20,7 @@ const DetailedBlog = () => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                await axios.get('/api/auth/check');
+                await axios.get('https://shivam-blogs.onrender.com/api/auth/check');
                 setIsLoggedIn(true);
             } catch (err) {
                 setIsLoggedIn(false);
@@ -31,7 +31,7 @@ const DetailedBlog = () => {
 
     // Fetch the detailed blog based on the blogId
     useEffect(() => {
-        axios.get(`/api/blogs/${blogId}`)
+        axios.get(`https://shivam-blogs.onrender.com/api/blogs/${blogId}`)
             .then(res => {
                 setBlog(res.data);  // Set the blog data
             })
@@ -51,7 +51,7 @@ const DetailedBlog = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post('/api/logout');  // Log out via backend to clear cookie
+            await axios.post('https://shivam-blogs.onrender.com/api/logout');  // Log out via backend to clear cookie
             setIsLoggedIn(false);
             navigate('/'); // Redirect to home after logout
         } catch (err) {
