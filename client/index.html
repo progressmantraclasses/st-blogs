@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <title>NGO Events App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      window.mapplsInitialize = function() {
+        console.log('Mappls SDK loaded and ready');
+        // The React app will use this callback
+        window.mapplsInitializeComplete = true;
+      };
+    </script>
+    <script src="https://apis.mappls.com/advancedmaps/api/18daea6d89db814ff7c19493a8a9509c/map_sdk?v=3.0&layer=vector&callback=mapplsInitialize"></script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
