@@ -141,12 +141,14 @@ router.post("/verify-signup-otp", async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
         // Set JWT token in cookie
-        res.cookie('token', token, {
-            httpOnly: true, // Ensures the cookie is not accessible via JavaScript
-            secure: process.env.NODE_ENV === 'production', // Use secure flag in production (HTTPS)
-            maxAge: 24 * 60 * 60 * 1000, // Cookie expires in 1 day
-        });
+res.cookie('token', token, {
+  httpOnly: true,             // Prevents access from JS
+  secure: true,               // Ensures cookies are sent only over HTTPS
+  sameSite: 'None',           // REQUIRED for cross-site cookies
+  maxAge: 24 * 60 * 60 * 1000 // 1 day
+});
 
+        
         res.json({ message: "OTP verified", user });
     } catch (error) {
         res.status(500).json({ message: "Error in OTP Verification" });
@@ -169,11 +171,13 @@ router.post("/login", async (req, res) => {
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-         res.cookie('token', token, {
-            httpOnly: true, // Ensures the cookie is not accessible via JavaScript
-            secure: process.env.NODE_ENV === 'production', // Use secure flag in production (HTTPS)
-            maxAge: 24 * 60 * 60 * 1000, // Cookie expires in 1 day
-        });
+res.cookie('token', token, {
+  httpOnly: true,             // Prevents access from JS
+  secure: true,               // Ensures cookies are sent only over HTTPS
+  sameSite: 'None',           // REQUIRED for cross-site cookies
+  maxAge: 24 * 60 * 60 * 1000 // 1 day
+});
+
 
 
 
@@ -231,11 +235,13 @@ router.post("/verify-otp", async (req, res) => {
         const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
         // Set JWT token in cookie
-        res.cookie('token', token, {
-            httpOnly: true, // Ensures the cookie is not accessible via JavaScript
-            secure: process.env.NODE_ENV === 'production', // Use secure flag in production (HTTPS)
-            maxAge: 24 * 60 * 60 * 1000, // Cookie expires in 1 day
-        });
+res.cookie('token', token, {
+  httpOnly: true,             // Prevents access from JS
+  secure: true,               // Ensures cookies are sent only over HTTPS
+  sameSite: 'None',           // REQUIRED for cross-site cookies
+  maxAge: 24 * 60 * 60 * 1000 // 1 day
+});
+
 
         res.json({ message: "OTP verified", user });
     } catch (error) {
@@ -319,12 +325,13 @@ router.get("/google/callback", passport.authenticate("google", { session: false 
         return res.redirect("https://st-blogs.vercel.app/login?error=OAuthFailed");
     }
 
-  res.cookie('token', token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === 'production', // Only true in production
-  sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // Needed for cross-origin in prod
-  maxAge: 24 * 60 * 60 * 1000, // 1 day
+res.cookie('token', token, {
+  httpOnly: true,             // Prevents access from JS
+  secure: true,               // Ensures cookies are sent only over HTTPS
+  sameSite: 'None',           // REQUIRED for cross-site cookies
+  maxAge: 24 * 60 * 60 * 1000 // 1 day
 });
+
 
 
     res.redirect("https://st-blogs.vercel.app");
@@ -338,12 +345,13 @@ router.get("/github/callback", passport.authenticate("github", { session: false 
         return res.redirect("https://st-blogs.vercel.app/login?error=OAuthFailed");
     }
 
-  res.cookie('token', token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === 'production', // Only true in production
-  sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // Needed for cross-origin in prod
-  maxAge: 24 * 60 * 60 * 1000, // 1 day
+res.cookie('token', token, {
+  httpOnly: true,             // Prevents access from JS
+  secure: true,               // Ensures cookies are sent only over HTTPS
+  sameSite: 'None',           // REQUIRED for cross-site cookies
+  maxAge: 24 * 60 * 60 * 1000 // 1 day
 });
+
 
 
     res.redirect("https://st-blogs.vercel.app");
@@ -357,11 +365,11 @@ router.get("/linkedin/callback", passport.authenticate("linkedin", { session: fa
         return res.redirect("https://st-blogs.vercel.app/login?error=OAuthFailed");
     }
 
- res.cookie('token', token, {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === 'production', // Only true in production
-  sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // Needed for cross-origin in prod
-  maxAge: 24 * 60 * 60 * 1000, // 1 day
+res.cookie('token', token, {
+  httpOnly: true,             // Prevents access from JS
+  secure: true,               // Ensures cookies are sent only over HTTPS
+  sameSite: 'None',           // REQUIRED for cross-site cookies
+  maxAge: 24 * 60 * 60 * 1000 // 1 day
 });
 
     res.redirect("https://st-blogs.vercel.app");
