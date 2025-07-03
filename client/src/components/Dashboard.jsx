@@ -4,26 +4,28 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { FaBars, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 
+  // Axios config
+  axios.defaults.withCredentials = true;
+  axios.defaults.baseURL = 'https://shivam-blogs.onrender.com';
+
+
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile menu state
   const navigate = useNavigate();
 
-  // Axios config
-  axios.defaults.withCredentials = true;
-  axios.defaults.baseURL = 'https://shivam-blogs.onrender.com';
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         // Check token validity
-        const res = await axios.get('/api/auth/check');
+        const res = await axios.get('https://shivam-blogs.onrender.com/api/auth/check');
         setIsLoggedIn(true);
         
         // If logged in, fetch user data from /api/auth/user
         const userId = res.data.user.id; // Assuming the response contains user ID
-        const userDataRes = await axios.get(`/api/auth/user`, {
+        const userDataRes = await axios.get(`https://shivam-blogs.onrender.com/api/auth/user`, {
           params: { id: userId }
         });
         setUser(userDataRes.data); // Assuming the response contains the full user data
@@ -39,7 +41,7 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('/api/logout'); // Optional if you have logout endpoint
+      await axios.post('https://shivam-blogs.onrender.com/api/logout'); // Optional if you have logout endpoint
       Cookies.remove('token');
       setIsLoggedIn(false);
       setUser(null);
