@@ -319,12 +319,13 @@ router.get("/google/callback", passport.authenticate("google", { session: false 
         return res.redirect("https://st-blogs.vercel.app/login?error=OAuthFailed");
     }
 
-    res.cookie("token", req.user.token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "Lax",
-        maxAge: 24 * 60 * 60 * 1000,
-    });
+  res.cookie('token', token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', // Only true in production
+  sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // Needed for cross-origin in prod
+  maxAge: 24 * 60 * 60 * 1000, // 1 day
+});
+
 
     res.redirect("https://st-blogs.vercel.app");
 });
@@ -337,12 +338,13 @@ router.get("/github/callback", passport.authenticate("github", { session: false 
         return res.redirect("https://st-blogs.vercel.app/login?error=OAuthFailed");
     }
 
-    res.cookie("token", req.user.token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "Lax",
-        maxAge: 24 * 60 * 60 * 1000,
-    });
+  res.cookie('token', token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', // Only true in production
+  sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // Needed for cross-origin in prod
+  maxAge: 24 * 60 * 60 * 1000, // 1 day
+});
+
 
     res.redirect("https://st-blogs.vercel.app");
 });
@@ -355,12 +357,12 @@ router.get("/linkedin/callback", passport.authenticate("linkedin", { session: fa
         return res.redirect("https://st-blogs.vercel.app/login?error=OAuthFailed");
     }
 
-    res.cookie("token", req.user.token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "Lax",
-        maxAge: 24 * 60 * 60 * 1000,
-    });
+ res.cookie('token', token, {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', // Only true in production
+  sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // Needed for cross-origin in prod
+  maxAge: 24 * 60 * 60 * 1000, // 1 day
+});
 
     res.redirect("https://st-blogs.vercel.app");
 });
