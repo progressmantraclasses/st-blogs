@@ -20,7 +20,7 @@ const ContactUs = () => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const res = await axios.get('/api/auth/check');
+                const res = await axios.get('https://shivam-blogs.onrender.com/api/auth/check');
                 setIsLoggedIn(true);
                 setUserName(res.data.user.name); // Assuming the user data is returned
             } catch (err) {
@@ -71,7 +71,7 @@ const ContactUs = () => {
     // Handle Logout
     const handleLogout = async () => {
         try {
-            await axios.post('/api/logout');  // Logout via backend
+            await axios.post('https://shivam-blogs.onrender.com/api/logout');  // Logout via backend
             setIsLoggedIn(false);
             navigate('/');  // Redirect to homepage after logout
         } catch (err) {
